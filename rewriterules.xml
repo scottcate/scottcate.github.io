@@ -11,8 +11,8 @@
           <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
         </rule>
         <rule name="isproxy root" stopProcessing="true">
-          <match url="^$" />
-          <action type="Rewrite" url="https://scottcate.github.io/" />
+          <match url="(.*)" />
+          <action type="Rewrite" url="https://scottcate.github.io/{R:1}" />
           <serverVariables>
             <set name="HTTP_ACCEPT_ENCODING" value="" />
           </serverVariables>
@@ -20,8 +20,8 @@
       </rules>
       <outboundRules>
         <rule name="fix links" preCondition="IsHTML">
-          <match filterByTags="A" pattern="^https:\/\/scottcate\.github\.io\/(.*)" />
-          <action type="Rewrite" value="/{R:1}" />
+          <match pattern="scottcate\.github\.io" />
+          <action type="Rewrite" value="reverseproxydemo.com" />
         </rule>
         <preConditions>
           <preCondition name="IsHTML">
